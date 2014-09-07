@@ -1,6 +1,6 @@
 ## Exploratory Data Analysis, Coursera
 ## Course Project 1
-## Plot 2
+## Plot 3
 ## Author: Aleksandra Kocot (Olks)
 
 
@@ -19,13 +19,21 @@ timeANDdate <- paste(data.selected[,1], data.selected[,2])
 time.conv <- strptime(timeANDdate, "%d/%m/%Y %H:%M:%S")
 
 ## converting data to numeric class
-global.power <- as.numeric(data.selected[,3])
+sub1 <- as.numeric(data.selected[,7])
+sub2 <- as.numeric(data.selected[,8])
+sub3 <- as.numeric(data.selected[,9])
 
 ## creating PNG file
-png("plot2.png", width=480, height=480)
+png("plot3.png", width=480, height=480)
 Sys.setlocale("LC_TIME", "English")
-plot(time.conv,global.power,
+plot(time.conv,sub1,
      type="l",
-     ylab="Global Active Power (kilowatts)",
+     ylab="Energy sub metering",
      xlab="")
+lines(time.conv,sub2,col="red")
+lines(time.conv,sub3,col="blue")
+legend("topright", 
+       c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),
+       col=c("black","red","blue"),
+       cex=0.75, lty=1)
 dev.off()

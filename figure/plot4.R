@@ -1,6 +1,6 @@
 ## Exploratory Data Analysis, Coursera
 ## Course Project 1
-## Plot 2
+## Plot 4
 ## Author: Aleksandra Kocot (Olks)
 
 
@@ -19,13 +19,42 @@ timeANDdate <- paste(data.selected[,1], data.selected[,2])
 time.conv <- strptime(timeANDdate, "%d/%m/%Y %H:%M:%S")
 
 ## converting data to numeric class
+sub1 <- as.numeric(data.selected[,7])
+sub2 <- as.numeric(data.selected[,8])
+sub3 <- as.numeric(data.selected[,9])
+voltage <- as.numeric(data.selected[,5])
+reactive <- as.numeric(data.selected[,4])
 global.power <- as.numeric(data.selected[,3])
 
 ## creating PNG file
-png("plot2.png", width=480, height=480)
+png("plot4.png", width=480, height=480)
 Sys.setlocale("LC_TIME", "English")
+par(mfrow=c(2,2))
+
 plot(time.conv,global.power,
      type="l",
-     ylab="Global Active Power (kilowatts)",
+     ylab="Global Active Power",
      xlab="")
+
+plot(time.conv,voltage,
+     type="l",
+     ylab="Voltage",
+     xlab="datetime")
+
+plot(time.conv,sub1,
+     type="l",
+     ylab="Energy sub metering",
+     xlab="")
+lines(time.conv,sub2,col="red")
+lines(time.conv,sub3,col="blue")
+legend("topright", 
+       c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),
+       col=c("black","red","blue"),
+       cex=0.75, lty=1)
+
+plot(time.conv,reactive,
+     type="l",
+     ylab="Global_reactive_power",
+     xlab="datetime")
+
 dev.off()
